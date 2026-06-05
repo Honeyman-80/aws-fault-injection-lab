@@ -1,4 +1,3 @@
-cat > template.yaml <<'EOF'
 AWSTemplateFormatVersion: '2010-09-09'
 Transform: AWS::Serverless-2016-10-31
 Description: Fault injection lab - API Gateway to Lambda to DynamoDB
@@ -26,7 +25,7 @@ Resources:
     Type: AWS::Serverless::Function
     Properties:
       CodeUri: src/
-      Handler: app.lambda_hander
+      Handler: app.lambda_handler
       Environment:
         Variables:
           TABLE_NAME: !Ref MessagesTable
@@ -44,4 +43,3 @@ Outputs:
   ApiUrl:
     Description: API Gateway endpoint URL
     Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/messages"
-EOF
