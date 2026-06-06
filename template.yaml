@@ -28,16 +28,16 @@ Resources:
       Handler: app.lambda_handler
       Environment:
         Variables:
-          TABLE_NAME: !Ref MessagesTable
+          TABLE_NAME: fault-injection-messages
       Policies:
         - DynamoDBCrudPolicy:
-            TableName: !Ref MessagesTable
+            TableName: fault-injection-messages
       Events:
         SaveMessageApi:
           Type: Api
           Properties:
             Path: /messages
-            Method: post
+            Method: get
 
 Outputs:
   ApiUrl:
