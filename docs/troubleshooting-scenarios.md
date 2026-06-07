@@ -84,3 +84,37 @@ When encountering AccessDenied:
 4. Is the targeted resource the expected resource?
 
 Do not assume every AccessDenied error is caused by missing permissions. Incorrect configuration can produce similar symptoms.
+
+# Troubleshooting Playbook
+
+## 403 Forbidden
+Likely before Lambda. Check API Gateway method settings, API key requirement, usage plan, and stage association.
+
+## 429 Too Many Requests
+Likely API Gateway throttling. Check usage plan rate/burst limits.
+
+## 502 Internal Server Error
+Likely backend failure. Check Lambda CloudWatch logs.
+
+## Missing Authentication Token
+Usually route, method, or stage mismatch. Compare client URL/method to API Gateway resources.
+
+## AccessDeniedException
+Do not assume “just add permissions.” Check:
+- Who was denied
+- What action was attempted
+- Which resource was targeted
+- Whether that resource is expected
+
+## HandlerNotFound
+Check Lambda runtime handler setting and function name in code.
+
+## KeyError
+Check request body field names against what the Lambda code expects.
+
+## CloudTrail
+Use CloudTrail to answer:
+- Who changed something?
+- What action was taken?
+- When did it happen?
+- What resource was changed?
