@@ -115,3 +115,25 @@ Testing:
   * Which resource was targeted
   * Whether the resource is expected
 * Absence of Lambda logs can indicate the request never reached Lambda.
+
+## Fault Injection Lab Summary
+
+Built a small AWS serverless application:
+
+API Gateway → Lambda → DynamoDB
+
+Then used it as a troubleshooting lab to investigate:
+
+- 403 Forbidden from API key / usage plan issues
+- 429 Too Many Requests from throttling
+- 502 Internal Server Error from Lambda failures
+- Missing Authentication Token from route/method mismatch
+- AccessDeniedException from IAM policy/resource mismatch
+- Runtime.HandlerNotFound from Lambda handler misconfiguration
+- KeyError from request body and code mismatch
+- CloudWatch alarms for 4XX and 5XX errors
+- CloudTrail events to identify IAM policy changes
+
+Key troubleshooting pattern:
+
+Symptom → Logs/Metrics → Root Cause → Fix → Retest
